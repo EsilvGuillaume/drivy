@@ -276,10 +276,33 @@ function deductedOption(rentals)
 	}
 }
 //Fin exercice 4
+///////////////////////////////////////////
+//Début exercice 5
+////////////////////////////////////////////
+function attributionpayment(rentals)
+{
+	for (var i=0; i<rentals.length;i++)
+		{
+		for (var j=0; j<actors.length;j++)//deuxième boucle, au cas ou l'ordre des insertions actor / rentals ne sont pas dans l'ordre
+			{
+		if(rentals[i].id == actors[j].rentalId)
+			{
+			actors[i].payment[0].amount= rentals[i].price;
+				actors[i].payment[1].amount= rentals[i].price *0.70;
+					actors[i].payment[2].amount=rentals[i].commission.insurance;
+						actors[i].payment[3].amount=rentals[i].commission.assistance;
+							actors[i].payment[4].amount=rentals[i].commission.drivy;	
+							console.log(actors[i]);
+			}
+		}
+		}
+}
+//Fin exercice 5
 rentalprice();
 decreasing_price(rentals);
 Commision(rentals);
 deductedOption(rentals);
+attributionpayment(rentals);
 console.log(cars);
 console.log(rentals);
 console.log(actors);
