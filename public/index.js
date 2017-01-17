@@ -242,8 +242,28 @@ function decreasing_price(rentals)
 	}
 //Fin exercice 2 
 //////////////////////////////////////////
+//Début exercice 3
+//////////////////////////////////////////
+function Commision(rentals)
+{
+for(var i =1; i<rentals.length; i++)
+	{
+	var jour = getDatediff(rentals[i].id);
+	var comission = rentals[i].price * 0.30;
+	var insurance = comission / 2;
+	var assistance = jour;
+	var drivy = comission - insurance - assistance;
+	rentals[i].commission.drivy = drivy;
+	rentals[i].commission.insurance = insurance;
+	rentals[i].commission.assistance = jour;
+	console.log("com : "+comission +" assurance : "+ insurance +" assistance : " +assistance +" com de drivy : "+ drivy)
+	}
+}
+//Fin exercice 3
+
 rentalprice();
 decreasing_price(rentals);
+Commision(rentals);
 console.log(cars);
 console.log(rentals);
 console.log(actors);
