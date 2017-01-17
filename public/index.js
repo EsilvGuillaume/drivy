@@ -165,6 +165,8 @@ var rentalModifications = [{
   'pickupDate': '2015-12-05'
 }];
 
+//EXERCICE 1 début : 
+////////////////////////////////////////////////////
 function getCarID(id)
 {
 	for (var i=1; i<cars.length;i++)
@@ -212,7 +214,36 @@ function rentalprice()
 			}
 		}
 	}
+//FIN EXERCICE 1 
+//////////////////////////////////////////////////////
+//Exercice 2 début :
+/////////////////////////////////////////////////////
+function decreasing_price(rentals)
+{
+	for(var i = 1; i<rentals.length;i++)
+		{
+		var recuptemps = getDatediff(rentals[i].id);
+		if (recuptemps >1 && recuptemps <=4)
+			{
+			rentals[i].price *= 0.90;
+			console.log("prix après réduction de 10% : "+rentals[i].price);
+			}
+		else if (recuptemps >4 && recuptemps <=10)
+		{
+		rentals[i].price *= 0.70;
+		console.log("prix après réduction de 30% : "+rentals[i].price);
+		}
+		else if (recuptemps >10)
+		{
+		rentals[i].price *= 0.50;
+		console.log("prix après réduction de 50% : "+rentals[i].price);
+		}
+		}
+	}
+//Fin exercice 2 
+//////////////////////////////////////////
 rentalprice();
+decreasing_price(rentals);
 console.log(cars);
 console.log(rentals);
 console.log(actors);
