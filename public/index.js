@@ -169,7 +169,7 @@ var rentalModifications = [{
 ////////////////////////////////////////////////////
 function getCarID(id)
 {
-	for (var i=1; i<cars.length;i++)
+	for (var i=0; i<cars.length;i++)
 		{
 		if(id == cars[i].id)
 			{
@@ -179,7 +179,7 @@ function getCarID(id)
 }
 function getRentalID(id)
 {
-	for (var i =1; i<rentals.length;i++)
+	for (var i =0; i<rentals.length;i++)
 	{
 	if(id == rentals[i].id)
 		{
@@ -193,12 +193,11 @@ function getDatediff(id)
 	var DateRetour = new Date (rentalschoix.returnDate);
 	var DateReserve = new Date(rentalschoix.pickupDate);
 	var jour = (DateRetour - DateReserve )/(24*3600*1000)+1 ;
-	console.log(jour);
 	return jour ; 
 }
 function rentalprice()
 {
-	for (var i = 1; i<rentals.length; i++)
+	for (var i = 0; i<rentals.length; i++)
 		{
 		
 		if(rentals[i].carId == cars[i].id)
@@ -220,23 +219,23 @@ function rentalprice()
 /////////////////////////////////////////////////////
 function decreasing_price(rentals)
 {
-	for(var i = 1; i<rentals.length;i++)
+	for(var i = 0; i<rentals.length;i++)
 		{
 		var recuptemps = getDatediff(rentals[i].id);
 		if (recuptemps >1 && recuptemps <=4)
 			{
 			rentals[i].price *= 0.90;
-			console.log("prix après réduction de 10% : "+rentals[i].price);
+			console.log("prix après réduction de 10% : de : "+rentals[i].id+" : "+rentals[i].price);
 			}
 		else if (recuptemps >4 && recuptemps <=10)
 		{
 		rentals[i].price *= 0.70;
-		console.log("prix après réduction de 30% : "+rentals[i].price);
+		console.log("prix après réduction de 30% : de : "+rentals[i].id+" : "+rentals[i].price);
 		}
 		else if (recuptemps >10)
 		{
 		rentals[i].price *= 0.50;
-		console.log("prix après réduction de 50% : "+rentals[i].price);
+		console.log("prix après réduction de 50% : de : "+rentals[i].id+" : "+rentals[i].price);
 		}
 		}
 	}
@@ -246,7 +245,7 @@ function decreasing_price(rentals)
 //////////////////////////////////////////
 function Commision(rentals)
 {
-for(var i =1; i<rentals.length; i++)
+for(var i =0; i<rentals.length; i++)
 	{
 	var jour = getDatediff(rentals[i].id);
 	var comission = rentals[i].price * 0.30;
@@ -256,14 +255,31 @@ for(var i =1; i<rentals.length; i++)
 	rentals[i].commission.drivy = drivy;
 	rentals[i].commission.insurance = insurance;
 	rentals[i].commission.assistance = jour;
-	console.log("com : "+comission +" assurance : "+ insurance +" assistance : " +assistance +" com de drivy : "+ drivy)
+	console.log("com : de : "+rentals[i].id+" : "+comission +" assurance : "+ insurance +" assistance : " +assistance +" com de drivy : "+ drivy)
 	}
 }
 //Fin exercice 3
-
+///////////////////////////////////////////
+//Début exercice 4
+//////////////////////////////////////////
+function deductedOption(rentals)
+{
+	for(var i =0; i<rentals.length; i++)
+	{
+	var jour = getDatediff(rentals[i].id);
+	if(rentals[i].options.deductibleReduction==true)
+		{
+		var addtionnalprice = jour * 4;
+		rentals[i].price += addtionnalprice;
+		console.log("Nouveau prix de : "+rentals[i].id+" : "+rentals[i].price);
+		}
+	}
+}
+//Fin exercice 4
 rentalprice();
 decreasing_price(rentals);
 Commision(rentals);
+deductedOption(rentals);
 console.log(cars);
 console.log(rentals);
 console.log(actors);
